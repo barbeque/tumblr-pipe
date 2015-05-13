@@ -30,13 +30,9 @@ if target_blog is None:
 
 print "That blog's title is:", target_blog['title']
 
-# Set up the twitter friend
-
-
-# Start the inner loop
-
-client.create_photo(
-	blog_name,
-	state="published",
-	tags=["testing"],
-	data=["1.jpg", "2.jpg", "3.jpg"])
+if __name__ == '__main__':
+	client.create_photo(
+		blog_name,
+		state="published",
+		tags=["testing"],
+		data=["1.jpg", "2.jpg", "3.jpg"])
