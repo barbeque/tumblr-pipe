@@ -1,0 +1,35 @@
+==Tumblr Pipe==
+This is a little program that you can run that takes tweets containing photos from a Twitter search and uploads them into your Tumblr.
+
+It's pretty similar to the IFTTT "create a photo on tumblr" plugin, but automatically excludes retweets and replies to cut down on fuzz in your tumblr blog.
+
+===Requirements===
+ * [pytumblr](https://github.com/tumblr/pytumblr)
+ * [python-twitter](https://github.com/bear/python-twitter)
+
+===How to Use===
+After installing all requirements, create a file called `secrets.yml` in the same directory as `pipe.py`. It must contain the following keys:
+ * `tumblr_consumer_key`
+ * `tumblr_consumer_secret`
+ * `tumblr_token_key`
+ * `tumblr_token_secret`
+ * `twitter_consumer_key`
+ * `twitter_consumer_secret`
+ * `twitter_token_key`
+ * `twitter_token_secret`
+
+These keys can be gained by creating an application in both the tumblr and twitter APIs and then copying the respective OAuth details to allow the application to work.
+
+Once `secrets.yml` is set up, change `config.yml` to suit your blog.
+
+|Key              | What's it for?                   |
+|---              | ---                              |
+|`blog`		  | The username of your blog        |
+|`tags`           | A list of tags to be applied to every tumblr post |
+|`search_term`    | The search term to search for on Twitter. |
+
+Last, launch the application with python:
+````
+python pipe.py
+````
+
