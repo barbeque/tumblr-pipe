@@ -37,5 +37,13 @@ client = pytumblr.TumblrRestClient(
 info = client.info()
 blogs = info['user']['blogs']
 
-blog_sought = tryget_config(config, 'blog', blogs[0]['name'])
-print "Targeting blog:", blog_sought
+blog_name = tryget_config(config, 'blog', blogs[0]['name'])
+print "Targeting blog:", blog_name
+
+# Verify the blog exists...a
+target_blog = next((blog for blog in blogs if blog['name'] == blog_name), None)
+if target_blog is None:
+	print 'Could not find a blog with the name', blog_name
+	sys.exit()
+
+print "That blog's title is:", target_blog['title']
