@@ -42,4 +42,4 @@ def post_to_tumblr(pictures, text, poster, tags):
 		blog_name,
 		state = 'published',
 		tags = tags,
-		data = pictures)
+		source = pictures)

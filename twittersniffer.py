@@ -51,6 +51,8 @@ def dump_media_urls(status):
 	if has_media_url(status):
 		for media in get_media_urls(status):
 			print media
+def get_sleep_time():
+	return api.GetAverageSleepTime('/search/tweets')
 
 if __name__ == '__main__':
 	# run some demo tests
@@ -58,4 +60,3 @@ if __name__ == '__main__':
 	clean_tweets = get_tweets('#garageofidiots')
 	for tweet in clean_tweets:
 		dump_status(tweet)
-	print api.GetAverageSleepTime('/search/tweets')
