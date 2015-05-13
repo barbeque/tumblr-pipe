@@ -44,3 +44,4 @@ if __name__ == '__main__':
 	clean_tweets = get_tweets('#garageofidiots')
 	for tweet in clean_tweets:
 		dump_status(tweet)
+	print api.GetAverageSleepTime('/search/tweets')
