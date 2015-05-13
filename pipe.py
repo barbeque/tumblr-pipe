@@ -19,6 +19,8 @@ def post_tumblr_from_twitter(twitter_status):
 	user_name = twitter_status.user.name
 	pictures = twittersniffer.get_media_urls(twitter_status)
 
+	print pictures
+
 	tumblrposter.post_to_tumblr(pictures, content, user_name, tags)
 
 	

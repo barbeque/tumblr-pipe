@@ -38,8 +38,10 @@ if __name__ == '__main__':
 		data=["1.jpg", "2.jpg", "3.jpg"])
 
 def post_to_tumblr(pictures, text, poster, tags):
-	client.create_photo(
-		blog_name,
-		state = 'published',
-		tags = tags,
-		source = pictures)
+	if len(pictures) > 0:
+		result = client.create_photo(
+			blog_name,
+			state = 'published',
+			tags = tags,
+			source = pictures[0])
+		print result

@@ -44,7 +44,7 @@ def has_media_url(status):
 	return status.media != None
 def get_media_urls(status):
 	if has_media_url(status):
-		return [media['expanded_url'] for media in status.media]
+		return [media['media_url'] for media in status.media]
 	else:
 		return []
 def dump_media_urls(status):
