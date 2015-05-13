@@ -47,3 +47,9 @@ if target_blog is None:
 	sys.exit()
 
 print "That blog's title is:", target_blog['title']
+
+client.create_photo(
+	blog_name,
+	state="published",
+	tags=["testing"],
+	data="image.jpg")
