@@ -29,7 +29,10 @@ Once `secrets.yml` is set up, change `config.yml` to suit your blog.
 |`search_term`    | The search term to search for on Twitter. |
 
 Last, launch the application with python:
-````
+```
 python pipe.py
-````
+```
 
+##Known Issues
+###Multiple images aren't supported
+The twitter api for `/search/tweets` is [currently broken](https://twittercommunity.com/t/search-tweets-endpoint-and-extended-entities/31655). The functionality to support it should exist once it starts working again, but is obviously untested..
