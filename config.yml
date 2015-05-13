@@ -1,2 +1,6 @@
 # The blog we want to post to.
 blog: api-demo
+tags:
+  - twitter
+  - testing
+  - just funning ya

@@ -20,7 +20,8 @@ def get_tweets_since(search_term, last_seen_id = None):
 	results = api.GetSearch(
 			term = search_term,
 			since_id = last_seen_id,
-			result_type = 'recent' )
+			result_type = 'recent',
+			include_entities = True )
 	return [x for x in results if not is_a_reply(x) and not is_a_retweet(x)]
 
 def dump_status(status):
@@ -30,13 +31,26 @@ def dump_status(status):
 		print '\tIs a reply.'
 	if is_a_retweet(status):
 		print '\tIs a retweet.'
+	if has_media_url(status):
+		print '\tHas media URL.'
+		dump_media_urls(status)
 	print
 
 def is_a_reply(status):
 	return status.in_reply_to_user_id != None
 def is_a_retweet(status):
 	return status.retweeted_status != None
-	
+def has_media_url(status):
+	return status.media != None
+def get_media_urls(status):
+	if has_media_url(status):
+		return [media['expanded_url'] for media in status.media]
+	else:
+		return []
+def dump_media_urls(status):
+	if has_media_url(status):
+		for media in get_media_urls(status):
+			print media
 
 if __name__ == '__main__':
 	# run some demo tests
