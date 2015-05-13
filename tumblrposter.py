@@ -1,10 +1,7 @@
 import pytumblr
 import yaml
 import sys
-
-def load_secrets(secretsfile):
-	with open(secretsfile) as stream:
-		return yaml.load(stream)
+import helpers
 
 def assert_secrets(secrets):
 	for mandatory_key in ['tumblr_consumer_key', 'tumblr_consumer_secret', 'tumblr_token_key', 'tumblr_token_secret']:
@@ -12,19 +9,10 @@ def assert_secrets(secrets):
 			print 'Missing mandatory secrets.yml key called', mandatory_key
 			sys.exit()
 
-def load_config():
-	with open('config.yml') as stream:
-		return yaml.load(stream)
-
-def tryget_config(config, key, fallback_value = None):
-	if key not in config:
-		return fallback_value
-	return config[key]
-
-secrets = load_secrets('secrets.yml')
+secrets = helpers.load_secrets('secrets.yml')
 assert_secrets(secrets)
 
-config = load_config()
+config = helpers.load_config()
 
 # auth via oauth
 client = pytumblr.TumblrRestClient(
@@ -37,7 +25,7 @@ client = pytumblr.TumblrRestClient(
 info = client.info()
 blogs = info['user']['blogs']
 
-blog_name = tryget_config(config, 'blog', blogs[0]['name'])
+blog_name = helpers.tryget_config(config, 'blog', blogs[0]['name'])
 print "Targeting blog:", blog_name
 
 # Verify the blog exists...
