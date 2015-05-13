@@ -1,4 +1,5 @@
 import yaml
+import urllib
 
 def load_secrets(secretsfile):
 	with open(secretsfile) as stream:
@@ -20,4 +21,12 @@ def assert_secrets(secrets, prefix):
 			print 'Missing mandatory secrets.yml key called', prefixed_key
 			sys.exit()
 
-
+def download_images_to_directory(images, directory):
+	paths = []
+	for image in images:
+		image_filename = image.split('/')[-1] # last part of the url
+		download_path = os.path.join(directory, image_filename)
+		urllib.urlretrieve(image, download_path)
+		paths += download_path
+		print 'Downloaded', image, 'to', download_path
+	return paths

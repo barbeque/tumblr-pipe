@@ -49,3 +49,5 @@ while True:
 	time.sleep(sleep_time + 5) # add an extra 5 seconds just to be nice
 
 	# TODO: Detect ctrl-c and shut down more cleanly?
+	# TODO: Remember last encountered tweet id between sessions?
+	# TODO: Don't double post?

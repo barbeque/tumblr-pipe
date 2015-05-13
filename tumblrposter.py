@@ -2,6 +2,7 @@ import pytumblr
 import yaml
 import sys
 import helpers
+import tempfile
 
 secrets = helpers.load_secrets('secrets.yml')
 helpers.assert_secrets(secrets, 'tumblr')
@@ -39,9 +40,32 @@ if __name__ == '__main__':
 
 def post_to_tumblr(pictures, text, poster, tags):
 	if len(pictures) > 0:
-		result = client.create_photo(
-			blog_name,
-			state = 'published',
-			tags = tags,
-			source = pictures[0])
-		print result
+		if len(pictures) > 1:
+			print 'Multiple photos encountered on this tweet'
+			# Multiple photo mode... need to download the images
+			# and then upload from disk
+			temp_dir = tempfile.mkdtemp()
+
+			try:
+				image_paths = helpers.download_images_to_directory(pictures, temp_dir)
+				# Upload
+				result = client.create_photo(
+					blog_name,
+					state = 'published',
+					tags = tags,
+					data = image_paths)
+				print result
+			
+			finally:
+				# Delete temp dir
+				shutil.rmtree(temp_dir, ignore_errors = True)
+
+		else:
+			# Single photo mode - just give tumblr the URL,
+			# it can figure it out
+			result = client.create_photo(
+				blog_name,
+				state = 'published',
+				tags = tags,
+				source = pictures[0])
+			print result
