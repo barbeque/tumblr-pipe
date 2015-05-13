@@ -13,3 +13,11 @@ def tryget_config(config, key, fallback_value = None):
 		return fallback_value
 	return config[key]
 
+def assert_secrets(secrets, prefix):
+	for mandatory_key in ['consumer_key', 'consumer_secret', 'token_key', 'token_secret']:
+		prefixed_key = prefix + '_' + mandatory_key
+		if prefixed_key not in secrets:
+			print 'Missing mandatory secrets.yml key called', prefixed_key
+			sys.exit()
+
+

@@ -3,14 +3,8 @@ import yaml
 import sys
 import helpers
 
-def assert_secrets(secrets):
-	for mandatory_key in ['tumblr_consumer_key', 'tumblr_consumer_secret', 'tumblr_token_key', 'tumblr_token_secret']:
-		if mandatory_key not in secrets:
-			print 'Missing mandatory secrets.yml key called', mandatory_key
-			sys.exit()
-
 secrets = helpers.load_secrets('secrets.yml')
-assert_secrets(secrets)
+helpers.assert_secrets(secrets, 'tumblr')
 
 config = helpers.load_config()
 
