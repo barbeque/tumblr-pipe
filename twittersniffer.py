@@ -20,11 +20,8 @@ def get_tweets_since(search_term, last_seen_id = None):
 	results = api.GetSearch(
 			term = search_term,
 			since_id = last_seen_id,
-			result_type = 'recent',
-			#query_users = False, # reduce quota hit
-			include_entities = True )
-	for result in results:
-		dump_status(result)
+			result_type = 'recent' )
+	return [x for x in results if not is_a_reply(x) and not is_a_retweet(x)]
 
 def dump_status(status):
 	print status.text
@@ -44,4 +41,6 @@ def is_a_retweet(status):
 if __name__ == '__main__':
 	# run some demo tests
 	print 'Authenticated to twitter as', credentials.name
-	get_tweets('#garageofidiots')
+	clean_tweets = get_tweets('#garageofidiots')
+	for tweet in clean_tweets:
+		dump_status(tweet)
