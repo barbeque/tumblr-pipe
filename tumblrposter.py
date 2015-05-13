@@ -7,7 +7,7 @@ def load_secrets(secretsfile):
 		return yaml.load(stream)
 
 def assert_secrets(secrets):
-	for mandatory_key in ['consumer_key', 'consumer_secret', 'token_key', 'token_secret']:
+	for mandatory_key in ['tumblr_consumer_key', 'tumblr_consumer_secret', 'tumblr_token_key', 'tumblr_token_secret']:
 		if mandatory_key not in secrets:
 			print 'Missing mandatory secrets.yml key called', mandatory_key
 			sys.exit()
@@ -28,10 +28,10 @@ config = load_config()
 
 # auth via oauth
 client = pytumblr.TumblrRestClient(
-		secrets['consumer_key'],
-		secrets['consumer_secret'],
-		secrets['token_key'],
-		secrets['token_secret']
+		secrets['tumblr_consumer_key'],
+		secrets['tumblr_consumer_secret'],
+		secrets['tumblr_token_key'],
+		secrets['tumblr_token_secret']
 	 )
 
 info = client.info()
@@ -40,7 +40,7 @@ blogs = info['user']['blogs']
 blog_name = tryget_config(config, 'blog', blogs[0]['name'])
 print "Targeting blog:", blog_name
 
-# Verify the blog exists...a
+# Verify the blog exists...
 target_blog = next((blog for blog in blogs if blog['name'] == blog_name), None)
 if target_blog is None:
 	print 'Could not find a blog with the name', blog_name
@@ -48,8 +48,13 @@ if target_blog is None:
 
 print "That blog's title is:", target_blog['title']
 
+# Set up the twitter friend
+
+
+# Start the inner loop
+
 client.create_photo(
 	blog_name,
 	state="published",
 	tags=["testing"],
-	data="image.jpg")
+	data=["1.jpg", "2.jpg", "3.jpg"])
