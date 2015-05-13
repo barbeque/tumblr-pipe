@@ -39,6 +39,8 @@ if __name__ == '__main__':
 		data=["1.jpg", "2.jpg", "3.jpg"])
 
 def post_to_tumblr(pictures, text, poster, tags):
+	encoded_poster = poster.encode('utf-8').strip()
+	encoded_text = text.encode('utf-8').strip() + '\n' + 'tweet by ' + encoded_poster
 	if len(pictures) > 0:
 		if len(pictures) > 1:
 			print 'Multiple photos encountered on this tweet'
@@ -53,6 +55,7 @@ def post_to_tumblr(pictures, text, poster, tags):
 					blog_name,
 					state = 'published',
 					tags = tags,
+					caption = encoded_text,
 					data = image_paths)
 				print result
 			
@@ -65,6 +68,7 @@ def post_to_tumblr(pictures, text, poster, tags):
 			# it can figure it out
 			result = client.create_photo(
 				blog_name,
+				caption = encoded_text,
 				state = 'published',
 				tags = tags,
 				source = pictures[0])
