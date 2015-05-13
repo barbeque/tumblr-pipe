@@ -13,6 +13,35 @@ api = twitter.Api(
 
 credentials = api.VerifyCredentials()
 
+def get_tweets(search_term):
+	return get_tweets_since(search_term)
+
+def get_tweets_since(search_term, last_seen_id = None):
+	results = api.GetSearch(
+			term = search_term,
+			since_id = last_seen_id,
+			result_type = 'recent',
+			#query_users = False, # reduce quota hit
+			include_entities = True )
+	for result in results:
+		dump_status(result)
+
+def dump_status(status):
+	print status.text
+	print status.user.name
+	if is_a_reply(status):
+		print '\tIs a reply.'
+	if is_a_retweet(status):
+		print '\tIs a retweet.'
+	print
+
+def is_a_reply(status):
+	return status.in_reply_to_user_id != None
+def is_a_retweet(status):
+	return status.retweeted_status != None
+	
+
 if __name__ == '__main__':
 	# run some demo tests
 	print 'Authenticated to twitter as', credentials.name
+	get_tweets('#garageofidiots')
