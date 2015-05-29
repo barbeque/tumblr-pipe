@@ -6,3 +6,6 @@ tags:
   - testing
   - just funning ya
 search_term: '#garageofidiots'
+# How the last seen tweet ID will be saved between
+# runs of the process.
+cookie_store: txt
