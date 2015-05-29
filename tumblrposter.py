@@ -5,7 +5,7 @@ import helpers
 import tempfile
 
 secrets = helpers.load_secrets('secrets.yml')
-helpers.assert_secrets(secrets, 'tumblr')
+helpers.assert_secrets(secrets)
 
 config = helpers.load_config()
 
@@ -58,7 +58,7 @@ def post_to_tumblr(pictures, text, poster, tags):
 					caption = encoded_text,
 					data = image_paths)
 				print result
-			
+
 			finally:
 				# Delete temp dir
 				shutil.rmtree(temp_dir, ignore_errors = True)

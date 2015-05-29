@@ -14,12 +14,16 @@ def tryget_config(config, key, fallback_value = None):
 		return fallback_value
 	return config[key]
 
-def assert_secrets(secrets, prefix):
-	for mandatory_key in ['consumer_key', 'consumer_secret', 'token_key', 'token_secret']:
-		prefixed_key = prefix + '_' + mandatory_key
-		if prefixed_key not in secrets:
-			print 'Missing mandatory secrets.yml key called', prefixed_key
+def assert_secrets(secrets):
+	for mandatory_key in get_secret_keys():
+		if mandatory_key not in secrets:
+			print 'Missing mandatory secrets.yml key called', mandatory_key
 			sys.exit()
+
+def get_secret_keys():
+	services = ['tumblr', 'twitter']
+	keys = ['consumer_key', 'consumer_secret', 'token_key', 'token_secret']
+	return ["{s}_{k}".format(s = service, k = key) for service in services for key in keys]
 
 def download_images_to_directory(images, directory):
 	paths = []

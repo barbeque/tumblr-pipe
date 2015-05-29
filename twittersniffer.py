@@ -3,7 +3,7 @@ import helpers
 
 cfg = helpers.load_config()
 secrets = helpers.load_secrets('secrets.yml')
-helpers.assert_secrets(secrets, 'twitter')
+helpers.assert_secrets(secrets)
 
 api = twitter.Api(
 	consumer_key = secrets['twitter_consumer_key'],
