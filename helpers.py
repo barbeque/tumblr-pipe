@@ -1,4 +1,5 @@
 import yaml
+import sys
 import urllib
 
 def load_secrets(secretsfile):
@@ -15,6 +16,10 @@ def tryget_config(config, key, fallback_value = None):
 	return config[key]
 
 def assert_secrets(secrets):
+	if secrets == None:
+		print 'Secrets could not be loaded from file (secrets.yml).'
+		sys.exit()
+
 	for mandatory_key in get_secret_keys():
 		if mandatory_key not in secrets:
 			print 'Missing mandatory secrets.yml key called', mandatory_key
