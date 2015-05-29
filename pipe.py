@@ -46,28 +46,23 @@ last_id = read_cookie()
 if last_id != None:
 	print 'Resuming from tweets after id = {0}.'.format(last_id)
 
-# run the pump...
-while True:
-	# fetch tweets
-	new_tweets = twittersniffer.get_tweets_since(search_term, last_id)
-	if len(new_tweets) > 0:
-		last_tweet_seen = max(new_tweets, key = lambda p: p.id)
-		last_id = last_tweet_seen.id
+# fetch tweets
+new_tweets = twittersniffer.get_tweets_since(search_term, last_id)
+if len(new_tweets) > 0:
+	last_tweet_seen = max(new_tweets, key = lambda p: p.id)
+	last_id = last_tweet_seen.id
 
-		# post tweets
-		for new_tweet in new_tweets:
-			print 'Posting a new tweet by', new_tweet.user.name
-			post_tumblr_from_twitter(new_tweet)
+	# post tweets
+	for new_tweet in new_tweets:
+		print 'Posting a new tweet by', new_tweet.user.name
+		post_tumblr_from_twitter(new_tweet)
 
-	print 'Posted', len(new_tweets), 'new tweets. Last id seen is', last_id
+print 'Posted', len(new_tweets), 'new tweets. Last id seen is', last_id
 
-	save_cookie(last_id)
+save_cookie(last_id)
 
-	sleep_time = twittersniffer.get_sleep_time()
-	if sleep_time > 0:
-		print 'Need to sleep for at least', sleep_time, 'seconds'
-	time.sleep(sleep_time + 5) # add an extra 5 seconds just to be nice
+sleep_time = twittersniffer.get_sleep_time()
+if sleep_time > 0:
+	print 'Need to wait for at least', sleep_time, 'seconds before running again'
 
-	# TODO: Detect ctrl-c and shut down more cleanly?
-	# TODO: Remember last encountered tweet id between sessions?
-	# TODO: Don't double post?
+# TODO: Don't double post?
