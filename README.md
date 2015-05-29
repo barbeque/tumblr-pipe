@@ -7,6 +7,8 @@ It's pretty similar to the IFTTT "create a photo on tumblr" plugin, but automati
  * [pytumblr](https://github.com/tumblr/pytumblr)
  * [python-twitter](https://github.com/bear/python-twitter)
 
+Install with `pip install -r requirements.txt`.
+
 ##How to Use
 After installing all requirements, create a file called `secrets.yml` in the same directory as `pipe.py`. It must contain the following keys:
  * `tumblr_consumer_key`
