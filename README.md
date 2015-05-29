@@ -38,3 +38,6 @@ python pipe.py
 ##Known Issues
 ###Multiple images aren't supported
 The twitter api for `/search/tweets` is [currently broken](https://twittercommunity.com/t/search-tweets-endpoint-and-extended-entities/31655). The functionality to support it should exist once it starts working again, but is obviously untested..
+
+###Saves state in a dumb way
+It needs to be changed from saving in a text file to saving to a database or something so it can be converted to a Heroku scheduled task or similar.
