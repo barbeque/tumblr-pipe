@@ -57,7 +57,9 @@ if len(new_tweets) > 0:
 		print 'Posting a new tweet by', new_tweet.user.name
 		post_tumblr_from_twitter(new_tweet)
 
-print 'Posted', len(new_tweets), 'new tweets. Last id seen is', last_id
+	print 'Posted', len(new_tweets), 'new tweets. Last id seen is', last_id
+else:
+	print 'No new tweets to post. Last id seen is', last_id
 
 save_cookie(last_id)
 
