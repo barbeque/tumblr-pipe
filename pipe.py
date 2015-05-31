@@ -52,8 +52,8 @@ if len(new_tweets) > 0:
 	last_tweet_seen = max(new_tweets, key = lambda p: p.id)
 	last_id = last_tweet_seen.id
 
-	# post tweets
-	for new_tweet in new_tweets:
+	# post tweets, reversed since descending date...
+	for new_tweet in reversed(new_tweets):
 		print 'Posting a new tweet by', new_tweet.user.name
 		post_tumblr_from_twitter(new_tweet)
 
