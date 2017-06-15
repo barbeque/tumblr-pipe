@@ -3,6 +3,7 @@ import yaml
 import sys
 import helpers
 import tempfile
+import shutil
 
 secrets = helpers.load_secrets('secrets.yml')
 helpers.assert_secrets(secrets)
