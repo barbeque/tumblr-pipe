@@ -1,6 +1,7 @@
 import yaml
 import sys
 import urllib
+import os
 
 def load_secrets(secretsfile):
 	with open(secretsfile) as stream:
