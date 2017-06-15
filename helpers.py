@@ -36,6 +36,6 @@ def download_images_to_directory(images, directory):
 		image_filename = image.split('/')[-1] # last part of the url
 		download_path = os.path.join(directory, image_filename)
 		urllib.urlretrieve(image, download_path)
-		paths += download_path
+		paths.append(download_path)
 		print 'Downloaded', image, 'to', download_path
 	return paths
